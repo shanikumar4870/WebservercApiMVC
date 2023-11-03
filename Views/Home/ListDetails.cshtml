@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "ListDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/scriptJQ/dataTables.bootstrap4.min.js"></script>
+<script src="~/scriptJQ/dataTables.bootstrap4.js"></script>
+<script src="~/scriptJQ/jquery.dataTables.js"></script>
+<div class="row">
+    <table class=" table table-responsive" id="example">
+    </table>
+</div>
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+            method: "GET",
+            url: "https://jsonplaceholder.typicode.com/posts",
+            success: onsuccess,
+            failure: function (response) {
+                alert(response.d);
+            },
+            error: function (response) {
+                alert(response.d);
+            }
+        });
+
+    });
+
+    function onsuccess(response) {
+        //console.log(response);
+        $('#example').DataTable({
+            "data": response, // this passes your data to DataTables
+            "columns": [
+                { "title": "User ID", "data": "userId" },
+                { "title": "ID", "data": "id" },
+                { "title": "Title", "data": "title" }
+            ]
+        });
+    }
+</script>
+
