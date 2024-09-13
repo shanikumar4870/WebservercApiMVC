@@ -53,4 +53,15 @@ namespace Webservices_app.Models
         }
     }
 
+public  string  checkdatawise_Login(){
+    
+    string Q="select convert(nvarchar(12),U_CODE) as UserID,U_NAME as UserName,U_FullName FullName,t.DIVN,t.SEAS, Category,dv.NM Factory,dv.APP_CTRL APP_NAME,
+                isnull(DATEDIFF(DAY,pw_cr_date,getdate()),0) P_EXP_DAY
+				,isnull(U_RoleCode,0)U_RoleCode , DATEDIFF( day,pw_cr_date,getdate())  , pw_cr_date
+                from TBLLOGIN t
+                join DIVN_MST dv on dv.DIVN=t.DIVN
+                where isactive=1 and  u_name='admin' and u_Password='1234' AND t.DIVN='OL'  ";
+
+         retun Q;
+
 }
